@@ -1,0 +1,67 @@
+.carousel {
+  background-image: url("../../images/img/backapp.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 570px;
+  .left {
+    padding-left: 13rem;
+    padding-top: 11rem;
+    .btnApp {
+      @include button(
+        300px,
+        35px,
+        white,
+        #fb4226,
+        0,
+        white,
+        #fb4226,
+        #fb4226,
+        #fb4226
+      );
+      margin-bottom: 10px;
+    }
+    .left_h {
+      font-size: 30px;
+      line-height: 55px;
+    }
+
+    .text_p a {
+      color: white;
+      text-decoration: none;
+      &:hover {
+        color: #fb4226;
+        transition: 0.5s;
+      }
+    }
+  }
+
+  .right_1 {
+    position: absolute;
+
+    img {
+      width: 60%;
+    }
+  }
+  .right_2 {
+    position: relative;
+    left: 5px;
+    top: 9px;
+    width: 29%;
+    height: 459px;
+    border-radius: 17px;
+
+    img {
+      width: 120%;
+      height: 459px;
+      border-radius: 17px;
+      display: flex !important;
+    }
+    .slick-next {
+      display: none !important;
+    }
+    .slick-prev {
+      display: none !important;
+    }
+  }
+}

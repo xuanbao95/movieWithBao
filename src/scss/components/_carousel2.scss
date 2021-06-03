@@ -1,0 +1,10 @@
+.carousel1 {
+  margin-bottom: spacing(2.5);
+  cursor: pointer;
+  &:hover .carousel-picture .carousel-item .carousel__overlay {
+    opacity: 1;
+  }
+  background-color: black;
+  height: 500px;
+  width: 100%;
+}

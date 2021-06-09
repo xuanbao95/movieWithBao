@@ -25,6 +25,7 @@ export const actGetListMovie = (listMovie) => {
 
 
 // lấy danh sách cụm rạp
+
 export const actGetInformationShowTimeAPI = (idMovie) => {
   return (dispatch) => {
     Axios({
@@ -43,3 +44,23 @@ export const actGetInformationShowTime = (listShowTime) => {
     data: listShowTime
   }
 }
+export const actGetListSystemTheaterAPI = () => {
+  return (dispatch) => {
+    Axios({
+      method: "GET",
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap?maHeThongRap=cgv"
+    }).then((rs) => {
+      dispatch(actGetInformationShowTime(rs.data))
+    }).catch((err) => {
+      console.log(err.response.data);
+    })
+  }
+}
+export const actGetListSystemTheater = (listTheater) => {
+  return {
+    type: ActionType.GET_LIST_THEATER,
+    data: listTheater
+  }
+}
+
+

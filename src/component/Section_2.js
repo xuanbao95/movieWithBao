@@ -42,46 +42,9 @@ export default class Section_2 extends Component {
         };
         return (
             <div className={classes.root}>
-                {/* <section id="section_2">
-                    <div className="carousel mt-5">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-6 left">
-                                    <p className="text-white left_p">
-                                        Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
-                                        và đổi quà hấp dẫn.
-          </p>
-                                    <button className="btnApp">App miễn phí - Tải về ngay!</button>
-                                    <p className="text-white text_p">
-                                        TIX có hai phiên bản <a href> iOS</a> &amp;
-            <a href> Android</a>
-                                    </p>
-                                </div>
-                                {/* <div className="col-md-6 right">
-                                    <div className="right_1"><img src={dt} alt /></div>
-                                    <Slider {...settings1} className="right_2 single-item">
-                                        < div >
-                                            <img src={hitman} alt />
-                                        </div>
-                                        <div>
-                                            <img src={bandao} alt />
-                                        </div>
-                                        <div>
-                                            <img src={conjour} alt />
-                                        </div>
-                                        <div>
-                                            <img src={bload} alt />
-                                        </div>
-
-                                    </Slider>
-                                </div> */}
-                {/* </div>
-                        </div>
-                    </div>
-                </section> */}
-                <Grid container spacing={2} className="carousel mt-5">
+                <Grid container spacing={0}>
                     <Grid item xs={6}>
-                        <div className={classes.paper} className="left">
+                        <div className="left">
                             <p className="text-white left_p">
                                 Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
                                 và đổi quà hấp dẫn.
@@ -93,8 +56,8 @@ export default class Section_2 extends Component {
                             </p>
                         </div>
                     </Grid>
-                    <Grid item xs={6} >
-                        <div className={classes.paper}>
+                    <Grid item xs={6}>
+                        <div >
                             <div className="right_1"><img src={dt} alt /></div>
                             <Slider {...settings1} className="right_2 ">
                                 < div >
@@ -113,6 +76,7 @@ export default class Section_2 extends Component {
                             </Slider>
                         </div>
                     </Grid>
+
                 </Grid>
             </div >
         )

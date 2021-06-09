@@ -1,5 +1,5 @@
 .calendar {
-  background-color:azure;
+  background-color: azure;
   .calendar__bg {
     padding: spacing(8) 0 0;
     .calendar__content {
@@ -31,6 +31,9 @@
       }
     }
   }
+  .slick-prev {
+    left: -32rem !important;
+  }
   .slick-prev:before {
     content: "\276E";
     color: orange;
@@ -59,7 +62,6 @@
           }
         }
       }
-      
     }
     .slick-prev:before {
       display: none;

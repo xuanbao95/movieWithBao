@@ -4,6 +4,7 @@ import * as action from "../redux/action"
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from "@material-ui/core/Button"
+import { InsertCommentTwoTone } from '@material-ui/icons';
 class Search_Bar extends Component {
     constructor(props) {
         super(props);
@@ -25,35 +26,34 @@ class Search_Bar extends Component {
                 return item.tenPhim;
             });
             return (
-                <div>
+                <div style={{ width: 200 }}>
                     <Autocomplete
                         options={arr}
                         onChange={(event, newValue) => {
                             if (newValue !== null) {
                                 this.setState({
                                     tenPhim: newValue,
-
+                                    maPhim: '',
                                     tenHeThongRap: "",
                                     tenRap: "",
                                     ngayXem: "",
                                     gioXem: "",
-                                    btnValid: false
+                                    btnValid: true
                                 },
                                     () => {
-                                        //closua
-                                        let movie = listMovie.find((movie) => {
-                                            return movie.tenPhim === this.state.tenPhim
+                                        let movie = listMovie.find((item) => {
+                                            return item.tenPhim === this.state.tenPhim;
                                         })
                                         this.setState({
                                             maPhim: movie.maPhim,
                                         })
                                         this.props.getActListShowTime(movie.maPhim)
-                                    })
+                                    }
+                                )
                             }
 
-
                         }}
-                        renderInput={(params) => {
+                        renderInput={(params => {
                             return (
                                 <TextField
                                     {...params}
@@ -63,7 +63,8 @@ class Search_Bar extends Component {
                                     variant="outlined"
                                 />
                             )
-                        }}
+
+                        })}
                     />
                 </div>
             )
@@ -74,11 +75,11 @@ class Search_Bar extends Component {
         if (heThongRapChieu) {
             let arr = heThongRapChieu.map((item) => {
                 return item.tenHeThongRap;
-            });
+            })
             return (
-                <div>
+                <div style={{ width: 200 }}>
                     <Autocomplete
-                        value={this.props.tenHeThongRap}
+                        value={this.state.tenHeThongRap}
                         options={arr}
                         onChange={(event, newValue) => {
                             if (newValue !== null) {
@@ -88,51 +89,57 @@ class Search_Bar extends Component {
                                     tenRap: "",
                                     ngayXem: "",
                                     gioXem: "",
-                                    btnValid: false
+                                    btnValid: true
                                 })
                             }
+
                         }}
-                        renderInput={(params) => {
+                        renderInput={(params => {
                             return (
                                 <TextField
                                     {...params}
+                                    id="tenPhim"
                                     label="Phim"
                                     margin="normal"
                                     variant="outlined"
                                 />
                             )
-                        }}
+
+                        })}
                     />
                 </div>
             )
         } else {
             return (
-                <div>
+                <div style={{ width: 200 }}>
                     <Autocomplete
-                        value={this.props.tenHeThongRap}
-                        options={["vui long chon ten phim"]}
+                        value={this.state.tenHeThongRap}
+                        options={["vui lòng chọn phim"]}
                         onChange={(event, newValue) => {
                             if (newValue !== null) {
                                 this.setState({
-                                    ...this.state,
+
                                     tenHeThongRap: newValue,
                                     tenRap: "",
                                     ngayXem: "",
                                     gioXem: "",
-                                    btnValid: false
+                                    btnValid: true
                                 })
                             }
+
                         }}
-                        renderInput={(params) => {
+                        renderInput={(params => {
                             return (
                                 <TextField
                                     {...params}
+                                    id="tenPhim"
                                     label="Phim"
                                     margin="normal"
                                     variant="outlined"
                                 />
                             )
-                        }}
+
+                        })}
                     />
                 </div>
             )
@@ -142,243 +149,7 @@ class Search_Bar extends Component {
         let { heThongRapChieu } = this.props.listShowTime;
         let { tenHeThongRap } = this.state;
         if (heThongRapChieu && tenHeThongRap) {
-            let heThongRap = heThongRapChieu.find((heThongRap) => {
-                return heThongRap.tenHeThongRap === tenHeThongRap;
-            })
-            let arr = heThongRap.cumRapChieu.map((rap) => {
-                return rap.tenCumRap;
-            });
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.tenRap}
-                        options={arr}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
-                                    tenRap: newValue,
-                                    ngayXem: "",
-                                    gioXem: "",
-                                    maLichChieu: null,
-                                    btnValid: false
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.tenRap}
-                        options={["vui long chon rap"]}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
-                                    tenRap: newValue,
-                                    ngayXem: "",
-                                    gioXem: "",
-                                    maLichChieu: null,
-                                    btnValid: false
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        }
-    }
-    renderNgayXem = () => {
-        let { heThongRapChieu } = this.props.listShowTime;
-        let { tenPhim, tenRap, tenHeThongRap } = this.state;
-        if (heThongRapChieu && tenPhim && tenRap && tenHeThongRap) {
-            let heThongRap = heThongRapChieu.find((item) => {
-                return item.tenHeThongRap === tenHeThongRap
-            })
-            let rap = heThongRap.cumRapChieu.find((item) => {
-                return item.tenCumRap === tenRap;
-            })
-            const listDay = new Set(
-                rap.lichChieuPhim.map((item) => {
-                    return new Date(item.ngayChieuGioChieu).toLocaleDateString();
-                })
-            );
-            const listDayUpdate = [...listDay]
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.ngayXem}
-                        options={listDayUpdate}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
 
-                                    ngayXem: newValue,
-                                    gioXem: "",
-                                    maLichChieu: null,
-                                    btnValid: true
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.ngayXem}
-                        options={"vui long chon"}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
-
-                                    ngayXem: newValue,
-                                    gioXem: "",
-                                    maLichChieu: null,
-                                    btnValid: true
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        }
-    }
-    renderGioXem = () => {
-        let moment = require("moment");
-        let { heThongRapChieu } = this.props.listShowTime;
-        let { tenPhim, tenRap, tenHeThongRap, ngayXem } = this.state;
-        if (heThongRapChieu && tenPhim && tenRap && tenHeThongRap && ngayXem) {
-            let heThongRap = heThongRapChieu.find((item) => {
-                return item.tenHeThongRap === tenHeThongRap
-            })
-            let rap = heThongRap.cumRapChieu.find((item) => {
-                return item.tenCumRap === tenRap;
-            })
-            const listTime = new Set(
-                rap.lichChieuPhim.map((item) => {
-                    return new moment(item.ngayChieuGioChieu).format("HH:MM:A");
-                })
-            );
-            const listNewTime = [...listTime]
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.gioXem}
-                        options={listNewTime}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
-
-
-                                    gioXem: newValue,
-                                    maLichChieu: null,
-                                    btnValid: true
-                                }, () => {
-                                    this.checkBTN()
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <Autocomplete
-                        value={this.props.gioXem}
-                        options={"vui long chon"}
-                        onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                this.setState({
-                                    ...this.state,
-
-                                    ngayXem: newValue,
-                                    gioXem: "",
-                                    maLichChieu: null,
-                                    btnValid: true
-                                })
-                            }
-                        }}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label="Phim"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            )
-                        }}
-                    />
-                </div>
-            )
-        }
-    }
-    checkBTN = () => {
-        let { tenPhim, tenRap, tenHeThongRap, ngayXem, gioXem } = this.state;
-        if (tenPhim && tenRap && tenHeThongRap && ngayXem && gioXem) {
-            this.setState({
-                ...this.state,
-                btnValid: true
-            })
         }
     }
     render() {
@@ -387,12 +158,12 @@ class Search_Bar extends Component {
                 {this.renderTenPhim()}
                 {this.renderHeThongRap()}
                 {this.renderTenRap()}
-                {this.renderNgayXem()}
-                {this.renderGioXem()}
-                <Button className="buyTicket"
+                {/* {this.renderNgayXem()} */}
+                {/* {this.renderGioXem()} */}
+                {/* <Button className="buyTicket"
                     variant="contained" color="secondary"
                     disabled={!this.state.btnValid}
-                > Mua Vé</Button>
+                > Mua Vé</Button> */}
             </div>
         )
     }

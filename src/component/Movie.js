@@ -1,7 +1,7 @@
 import React from "react";
 // import star from "../images/img/s1.png";
 
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Dialog1 from "./Dialog";
 class Movie extends React.Component {
   render() {
@@ -36,9 +36,9 @@ class Movie extends React.Component {
             </a>
             <div className="calendar__text">
               <div class="calender_hover">
-                {/* <Link href="" to={`/detailMovie/${movie.maPhim}`}>
+                <Link href="" to={`/detailMovie/${movie.maPhim}`}>
                   Mua Vé
-                </Link> */}
+                </Link>
               </div>
               <div className="calendar_itemtext">
                 <p className="calendar__nameFilm">{movie.tenPhim}</p>

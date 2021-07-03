@@ -19,18 +19,19 @@ export default class ListCarousel extends Component {
     slides = [
 
 
-        <a href="https://www.youtube.com/embed/MG-BJBSeV64"><img src={pic1} alt="1" /></a>,
-        <a href="https://www.youtube.com/embed/-uOpDY8DAsM"><img src={pic2} alt="1" /></a>,
-        <a href="https://www.youtube.com/embed/OGfm7CNM5BY"><img src={pic3} alt="1" /></a>,
-        <a href="https://www.youtube.com/embed/sdkUce1q-n4"><img src={banner1} alt="1" /></a>,
-        <a href="https://www.youtube.com/embed/b5u8UTV0OWs"><img src={banner2} alt="1" /></a>,
-        <a href="https://www.youtube.com/embed/-uOpDY8DAsM"><img src={banner3} alt="1" /></a>,
+        < img src={pic1} alt="1" />,
+        <img src={pic2} alt="1" />,
+        <img src={pic3} alt="1" />,
+        <img src={banner1} alt="1" />,
+        <img src={banner2} alt="1" />,
+        <img src={banner3} alt="1" />,
     ]
     render() {
 
         return (
             <div className="Carou">
-                <Carousel slides={this.slides} autoplay={true} interval={3000} />
+
+                <Carousel slides={this.slides} autoplay={true} interval={3000}></Carousel>
             </div>
         )
     }

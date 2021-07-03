@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import * as action from "../redux/action"
 import { connect } from "react-redux"
 class Cinema extends Component {
+
     render() {
+
         return (
             <div>
                 <div name="test4">

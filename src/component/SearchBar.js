@@ -1,60 +1,59 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux"
-import * as action from "../redux/action"
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Button from "@material-ui/core/Button"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Button from "@material-ui/core/Button";
+import * as action from "../redux/action";
+import { withRouter } from "react-router";
 class SearchBar extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             tenPhim: "",
-            maPhim: '',
+            maPhim: "",
             tenHeThongRap: "",
             tenRap: "",
             ngayXem: "",
             gioXem: "",
             maLichChieu: null,
-            btnValid: false
-        }
+            btnValid: false,
+        };
     }
     renderTenPhim = () => {
         let { listMovie } = this.props;
-        // console.log(listMovie);
         if (listMovie) {
             let arr = listMovie.map((item) => {
                 return item.tenPhim;
             });
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         options={arr}
                         onChange={(event, newValue) => {
                             console.log(newValue);
                             if (newValue !== null) {
-                                this.setState({
-                                    tenPhim: newValue,
-                                    tenHeThongRap: "",
-                                    tenRap: "",
-                                    ngayXen: "",
-                                    gioXem: "",
-                                    btnValid: false
-
-                                },
+                                this.setState(
+                                    {
+                                        tenPhim: newValue,
+                                        tenHeThongRap: "",
+                                        tenRap: "",
+                                        ngayXem: "",
+                                        gioXem: "",
+                                        btnValid: false,
+                                    },
                                     () => {
-                                        //closua
                                         let movie = listMovie.find((movie) => {
-                                            return movie.tenPhim === this.state.tenPhim
-                                        })
+                                            return movie.tenPhim === this.state.tenPhim;
+                                        });
                                         this.setState({
                                             maPhim: movie.maPhim,
-                                        })
-                                        this.props.getListShowTime(movie.maPhim)
-                                    })
-
+                                        });
+                                        this.props.actGetInformationShowTimes(movie.maPhim);
+                                    }
+                                );
                             }
                         }}
-                        //   value = {this.state.tenPhim}
+                        value={this.state.tenPhim}
                         renderInput={(params) => {
                             return (
                                 <TextField
@@ -72,14 +71,13 @@ class SearchBar extends Component {
         }
     };
     renderHeThongRap = () => {
-        let { heThongRapChieu } = this.props.listMovieShowTime;
-        console.log(heThongRapChieu);
+        let { heThongRapChieu } = this.props.listShowTimes;
         if (heThongRapChieu) {
-            let arr = heThongRapChieu.map((heThongRap) => {
-                return heThongRap.tenHeThongRap;
+            let arr = heThongRapChieu.map((heThongCumRap) => {
+                return heThongCumRap.tenHeThongRap;
             });
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.tenHeThongRap}
                         options={arr}
@@ -91,13 +89,13 @@ class SearchBar extends Component {
                                 ngayXem: "",
                                 gioXem: "",
                                 btnValid: false,
-                            })
+                            });
                         }}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="he thong rap"
+                                    label="hệ thống rạp"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -108,16 +106,15 @@ class SearchBar extends Component {
             );
         } else {
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.tenHeThongRap}
-                        options={["vui long chon ten phim"]}
-
+                        options={["Vui lòng chọn phim"]}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="he thong rap"
+                                    label="hệ thống rạp"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -128,37 +125,35 @@ class SearchBar extends Component {
             );
         }
     };
-
     renderRap = () => {
-        let { heThongRapChieu } = this.props.listMovieShowTime;
+        let { heThongRapChieu } = this.props.listShowTimes;
         let { tenHeThongRap } = this.state;
         if (heThongRapChieu && tenHeThongRap) {
             let heThongRap = heThongRapChieu.find((heThongRap) => {
                 return heThongRap.tenHeThongRap === tenHeThongRap;
-            })
+            });
             let arr = heThongRap.cumRapChieu.map((rap) => {
                 return rap.tenCumRap;
             });
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.tenRap}
                         options={arr}
                         onChange={(event, newValue) => {
                             this.setState({
                                 ...this.state,
-
                                 tenRap: newValue,
                                 ngayXem: "",
                                 gioXem: "",
-                                btnValid: false
-                            })
+                                btnValid: false,
+                            });
                         }}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="tên rap"
+                                    label="Rạp"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -169,15 +164,15 @@ class SearchBar extends Component {
             );
         } else {
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.tenRap}
-                        options={["vui lòng chọn rạp"]}
+                        options={["Vui lòng chọn phim và thống rạp"]}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="tên rap"
+                                    label="Rạp"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -187,19 +182,18 @@ class SearchBar extends Component {
                 </div>
             );
         }
-
-
-    }
+    };
     renderNgayXem = () => {
-        let { heThongRapChieu } = this.props.listMovieShowTime;
-        let { tenPhim, tenRap, tenHeThongRap } = this.state;
-        if (heThongRapChieu && tenPhim && tenRap && tenHeThongRap) {
-            let heThongRap = heThongRapChieu.find((item) => {
-                return item.tenHeThongRap === tenHeThongRap
-            })
-            let rap = heThongRap.cumRapChieu.find((item) => {
-                return item.tenCumRap === tenRap;
-            })
+        let { heThongRapChieu } = this.props.listShowTimes;
+        let { tenPhim, tenHeThongRap, tenRap } = this.state;
+        if (heThongRapChieu && tenHeThongRap && tenPhim && tenRap) {
+            let heThongRap = heThongRapChieu.find((heThongRap) => {
+                return heThongRap.tenHeThongRap === tenHeThongRap;
+            });
+            let rap = heThongRap.cumRapChieu.find((rap) => {
+                return rap.tenCumRap === tenRap;
+            });
+
             const listDay = new Set(
                 rap.lichChieuPhim.map((lichChieu) => {
                     return new Date(lichChieu.ngayChieuGioChieu).toLocaleDateString();
@@ -207,7 +201,7 @@ class SearchBar extends Component {
             );
             const listDayUpdate = [...listDay];
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.ngayXem}
                         options={listDayUpdate}
@@ -216,14 +210,14 @@ class SearchBar extends Component {
                                 ...this.state,
                                 ngayXem: newValue,
                                 gioXem: "",
-                                btnValid: false
-                            })
+                                btnValid: false,
+                            });
                         }}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="ngày chiếu"
+                                    label="Ngày Chiếu"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -234,15 +228,15 @@ class SearchBar extends Component {
             );
         } else {
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.ngayXem}
-                        options={["vui lòng chọn phim,rạp phim,hệ thống rạp"]}
+                        options={["Vui lòng chọn phim và thống rạp và rạp"]}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="ngày xem"
+                                    label="Ngày Chiếu"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -252,43 +246,106 @@ class SearchBar extends Component {
                 </div>
             );
         }
-    }
-    renderGioXem = () => {
-        let moment = require("moment");
-        let { heThongRapChieu } = this.props.listMovieShowTime;
-        let { tenPhim, tenRap, tenHeThongRap, ngayXem } = this.state;
-        if (heThongRapChieu && tenPhim && tenRap && tenHeThongRap && ngayXem) {
-            let heThongRap = heThongRapChieu.find((item) => {
-                return item.tenHeThongRap === tenHeThongRap;
+    };
+    checkBtn = () => {
+        let { tenPhim, tenHeThongRap, tenRap, ngayXem, gioXem } = this.state;
+        if (tenPhim && tenHeThongRap && tenRap && ngayXem && gioXem) {
+            this.setState({
+                btnValid: true,
             });
-            let rap = heThongRap.cumRapChieu.find((item) => {
-                return item.tenCumRap === tenRap;
-            })
+        }
+    };
+
+    changePage = () => {
+        if (JSON.parse(localStorage.getItem("user")) === null) {
+            this.props.history.push("/form");
+        } else {
+            if (this.state.maLichChieu) {
+                this.props.history.push(`/booking/${this.state.maLichChieu}`);
+            }
+        }
+    };
+    getID = () => {
+        var moment = require("moment");
+        let { heThongRapChieu } = this.props.listShowTimes;
+        let { tenPhim, tenHeThongRap, tenRap, ngayXem, gioXem } = this.state;
+        if (
+            heThongRapChieu &&
+            tenHeThongRap &&
+            tenPhim &&
+            tenRap &&
+            gioXem &&
+            ngayXem
+        ) {
+            let heThongRap = heThongRapChieu.find((heThongRap) => {
+                return heThongRap.tenHeThongRap === tenHeThongRap;
+            });
+            let rap = heThongRap.cumRapChieu.find((rap) => {
+                return rap.tenCumRap === tenRap;
+            });
+
+            let lichChieu = rap.lichChieuPhim.find((lichChieu) => {
+                return (
+                    new Date(lichChieu.ngayChieuGioChieu).toLocaleDateString() ===
+                    ngayXem &&
+                    moment(lichChieu.ngayChieuGioChieu).format("HH:mm:A") === gioXem
+                );
+            });
+            this.setState(
+                {
+                    maLichChieu: lichChieu.maLichChieu,
+                },
+                () => {
+                    localStorage.setItem(
+                        "maLichChieu",
+                        JSON.stringify(this.state.maLichChieu)
+                    );
+                }
+            );
+        }
+    };
+    renderGioXem = () => {
+        var moment = require("moment");
+        let { heThongRapChieu } = this.props.listShowTimes;
+        let { tenPhim, tenHeThongRap, tenRap, ngayXem } = this.state;
+        if (heThongRapChieu && tenHeThongRap && tenPhim && tenRap && ngayXem) {
+            let heThongRap = heThongRapChieu.find((heThongRap) => {
+                return heThongRap.tenHeThongRap === tenHeThongRap;
+            });
+            let rap = heThongRap.cumRapChieu.find((rap) => {
+                return rap.tenCumRap === tenRap;
+            });
             const listTime = new Set(
                 rap.lichChieuPhim.map((lichChieu) => {
-                    return new moment(lichChieu.ngayChieuGioChieu).format("HH:MM:A");
+                    return moment(lichChieu.ngayChieuGioChieu).format("HH:mm:A");
                 })
             );
+
             const listTimeUpdate = [...listTime];
             return (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 200 }} className="input">
                     <Autocomplete
                         value={this.state.gioXem}
                         options={listTimeUpdate}
                         onChange={(event, newValue) => {
-                            this.setState({
-                                ...this.state,
-                                gioXem: newValue,
-                                btnValid: false
-                            }, () => {
-                                this.checkBTN()
-                            })
+                            this.setState(
+                                {
+                                    ...this.state,
+                                    gioXem: newValue,
+                                    btnValid: false,
+                                },
+                                () => {
+                                    this.checkBtn();
+                                    this.getID();
+                                    // this.getIDSee();
+                                }
+                            );
                         }}
                         renderInput={(params) => {
                             return (
                                 <TextField
                                     {...params}
-                                    label="giờ chiếu"
+                                    label="Giờ Chiếu"
                                     margin="normal"
                                     variant="outlined"
                                 />
@@ -298,34 +355,26 @@ class SearchBar extends Component {
                 </div>
             );
         } else {
-            return (<div style={{ width: 200 }}>
-                <Autocomplete
-                    value={this.state.gioXem}
-                    options={["vui lòng chọn tất cả các mục"]}
-                    renderInput={(params) => {
-                        return (
-                            <TextField
-                                {...params}
-                                label="giờ chiếu"
-                                margin="normal"
-                                variant="outlined"
-                            />
-                        );
-                    }}
-                />
-            </div>
-            )
+            return (
+                <div style={{ width: 200 }} className="input">
+                    <Autocomplete
+                        value={this.state.gioXem}
+                        options={["Vui lòng chọn phim và thống rạp và rạp và ngày "]}
+                        renderInput={(params) => {
+                            return (
+                                <TextField
+                                    {...params}
+                                    label="Giờ Chiếu"
+                                    margin="normal"
+                                    variant="outlined"
+                                />
+                            );
+                        }}
+                    />
+                </div>
+            );
         }
-    }
-    checkBTN = () => {
-        let { tenPhim, tenRap, tenHeThongRap, ngayXem, gioXem } = this.state;
-        if (tenPhim && tenRap && tenHeThongRap && ngayXem && gioXem) {
-            this.setState({
-                ...this.state,
-                btnValid: true
-            })
-        }
-    }
+    };
     render() {
         return (
             <div className="search_bar" name="test3">
@@ -334,26 +383,34 @@ class SearchBar extends Component {
                 {this.renderRap()}
                 {this.renderNgayXem()}
                 {this.renderGioXem()}
-                <Button className="buyTicket"
-                    variant="contained" color="secondary"
+                <Button
+                    onClick={this.changePage}
+                    className="buyTicket"
+                    variant="contained"
+                    color="secondary"
                     disabled={!this.state.btnValid}
-                > Mua Vé</Button>
+                >
+                    Mua Vé
+                </Button>
             </div>
-        )
+        );
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         listMovie: state.movieReducer.listMovie,
-        listMovieShowTime: state.movieReducer.listMovieShowTime,
-
-    }
-}
+        listShowTimes: state.movieReducer.listMovieShowTime,
+    };
+};
 const mapDispatchToProps = (dispatch) => {
     return {
-        getListShowTime: (idMovie) => {
-            dispatch(action.actGetInformationShowTimeAPI(idMovie))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
+        actGetInformationShowTimes: (idMovie) => {
+            dispatch(action.actGetInformationShowTimeAPI(idMovie));
+        },
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(SearchBar));

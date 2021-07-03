@@ -63,4 +63,56 @@ export const actGetListSystemTheater = (listTheater) => {
   }
 }
 
+export const actGetDetailMovieAPI = (id) => {
+  return (dispatch) => {
+    Axios({
+      method: "GET",
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`,
+    })
+      .then((rs) => {
+        dispatch(actGetDetailMovie(rs.data));
+      })
+      .catch((err) => {
+        // console.log(err.response.data);
+      });
+  };
+};
+export const actGetDetailMovie = (detailMovie) => {
+  return {
+    type: ActionType.GET_DETAIL_MOVIE,
+    data: detailMovie,
+  };
+};
 
+export const actGetListBookingAPI = (id) => {
+  return (dispatch) => {
+    // dispatch(actGetListDetailMovieStarBooking())
+    Axios({
+      method: "GET",
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`,
+    }).then((rs) => {
+      dispatch(actGetListChairBooking(rs.data))
+    }).catch((er) => {
+      console.log(er.response.data)
+    })
+  }
+}
+export const actGetListChairBooking = (listChair) => {
+  return {
+    type: ActionType.GET_LIST_CHAIR_BOOKING,
+    data: listChair
+  }
+}
+
+export const actGetListDetailMovieStarBooking = () => {
+  return {
+    type: "STRARBOOKING",
+
+  }
+}
+export const actGetListDetailMovieEndBooking = (message) => {
+  return {
+    type: "ENDBOOKING",
+    data: message
+  }
+}

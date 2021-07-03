@@ -7,6 +7,8 @@ import HomeTemplate from './Template/HomeTemplate';
 import { Suspense } from "react";
 import { CircularProgress } from "@material-ui/core";
 import Loading from "./component/Loading";
+import DetailMovie from "./component/DetailMovie";
+import TicketBooking from "./component/TicketBooking";
 
 // import Detail from './Tix/Detail';
 function App() {
@@ -28,12 +30,16 @@ function App() {
       })
     }
   }
-
+  var Snow = require("react-snow-effect")
   return (
     <BrowserRouter>
+      <Snow />
       <Switch>
         <Suspense fallback={Loading}>
           {showMenuHome(routerHome)}
+          <Route exact path="/detail/:id" Component={DetailMovie} />
+
+
         </Suspense>
 
 

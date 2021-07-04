@@ -9,7 +9,10 @@ import { CircularProgress } from "@material-ui/core";
 import Loading from "./component/Loading";
 import DetailMovie from "./component/DetailMovie";
 import TicketBooking from "./component/TicketBooking";
-
+import UserTemplate from './Template/UserTemplate';
+import AdminTemplate from './Template/AdminTemplate';
+import { createBrowserHistory } from 'history'
+export const history = createBrowserHistory();
 // import Detail from './Tix/Detail';
 function App() {
 
@@ -32,13 +35,14 @@ function App() {
   }
   var Snow = require("react-snow-effect")
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <Snow />
       <Switch>
         <Suspense fallback={Loading}>
           {showMenuHome(routerHome)}
           <Route exact path="/detail/:id" Component={DetailMovie} />
-
+          <Route path="/admin" exact component={AdminTemplate}></Route>
+          <Route path="/user" exact component={UserTemplate}></Route>
 
         </Suspense>
 

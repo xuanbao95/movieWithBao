@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import Dropdown from "react-bootstrap/Dropdown"
 import logo from "../../src/images/img/movie-time-neon-logo-cinema-night-neon-vector-21852342.jpg"
 export default class NavBars extends React.Component {
     constructor(props) {
@@ -38,7 +39,20 @@ export default class NavBars extends React.Component {
                     <div className="">
                         {this.state.detailUser === null ?
                             (<Link to="/form">Đăng nhập</Link>) :
-                            (<div><span>{this.state.detailUser.hoTen}</span><span onClick={this.handleLogInOut}> | thoat</span></div>)}
+                            (<div>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        {this.state.detailUser.hoTen}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-3"><span onClick={this.handleLogInOut}>Đăng Xuất</span></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+
+                            </div>)}
                     </div>
                 </div>
             </React.Fragment>

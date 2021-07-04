@@ -1,5 +1,6 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-grid-system';
 import mobile from '../../src/images/img/mobile.png'
 import img1 from '../images/img/sat-thu-vo-cung-cuc-hitman-agent-jun-c16-15795936177305_215x318.jpg'
 import img2 from '../images/img/ban-dao-peninsula-15858185751467_215x318.jpg'
@@ -12,11 +13,8 @@ export default function IntroduceApp() {
         <section id="section_2">
             <div className="introduceApp mt-5">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-6 left">
-                            <h1 className="text-white left_h">
-                                Ứng dụng tiện lợi dành cho người yêu điện ảnh
-                            </h1>
+                    <Row className="row">
+                        <Col className="left">
                             <p className="text-white left_p">
                                 Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
                                 và đổi quà hấp dẫn.
@@ -26,11 +24,11 @@ export default function IntroduceApp() {
                                 TIX có hai phiên bản <a href> iOS</a> &amp;
                                 <a href> Android</a>
                             </p>
-                        </div>
-                        <div className="col-md-6 right">
-                            <div className="right_1"><img src={mobile} alt="mobile" /></div>
+                        </Col>
+                        <Col className="">
+                            <div className="right_1"><img src={mobile} alt="mobile" className="right_img" /></div>
                             <Carousel fade nextIcon="" indicators="" className="right_2">
-                                <Carousel.Item>
+                                <Carousel.Item >
                                     <img src={img1} alt="img1" />
                                 </Carousel.Item>
                                 <Carousel.Item>
@@ -46,8 +44,8 @@ export default function IntroduceApp() {
                                     <img src={img5} alt="img5" />
                                 </Carousel.Item>
                             </Carousel>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </div>
             </div>
         </section>

@@ -10,7 +10,7 @@ import touch from "../images/img/TOUCH.png"
 import beta from "../images/img/bt.jpg"
 import dongda from "../images/img/ddc-dong-da-15379624326697.jpg"
 import start from "../images/img/star1.png"
-import zalo from "../images/img/zalo-logo.png"
+import zalo from "../images/img/zalopay_icon.png"
 import payz from "../images/img/payoo.jpg"
 import vietCom from "../images/img/VCB.png"
 import face from "../images/img/facebook-logo.png"
@@ -18,6 +18,7 @@ import apple from "../images/img/apple-logo.png"
 import and from "../images/img/android-logo.png"
 import zion from "../images/img/zion-logo.jpg"
 import bao from "../images/img/d1e6bd560daa9e20131ea8a0f62e87f8.png"
+import viet from "../images/img/VIETTINBANK.png"
 export default class Footer extends Component {
     render() {
         return (
@@ -92,6 +93,9 @@ export default class Footer extends Component {
                                             </div>
                                             <div className="img_flex">
                                                 <a href="#"><img className="rounded-circle" src={vietCom} alt /></a>
+                                            </div>
+                                            <div className="img_flex">
+                                                <a href="#"><img className="rounded-circle" src={viet} alt /></a>
                                             </div>
 
                                         </div>

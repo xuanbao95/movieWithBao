@@ -1,12 +1,19 @@
-.carousel {
-  background-image: url("../../images/img/backapp.jpg");
+.introduceApp {
+  background-image: url("https://tix.vn/app/assets/img/icons/backapp.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 570px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .carousel-inner {
+    width: 235px !important;
+  }
   .left {
-    padding-left: 13rem;
-    padding-top: 11rem;
+    padding-left: 13%;
+    padding-top: 11%;
     .btnApp {
       @include button(
         300px,
@@ -25,7 +32,9 @@
       font-size: 30px;
       line-height: 55px;
     }
-
+    .left_p {
+      padding: 1.5rem 0;
+    }
     .text_p a {
       color: white;
       text-decoration: none;
@@ -37,25 +46,26 @@
   }
 
   .right_1 {
-    position: absolute;
-
-    img {
-      width: 60%;
+    position: relative;
+    width: 247px;
+    height: 523px;
+    padding-top: 6rem;
+    .right_img {
+      width: 100%;
+      height: 100%;
     }
   }
   .right_2 {
-    position: relative;
-    left: 5px;
+    position: absolute;
+    left: 20px;
     top: 9px;
-    width: 29%;
-    height: 459px;
-    border-radius: 17px;
-
+    padding-top: 6rem;
     img {
-      width: 120%;
-      height: 459px;
+      width: 236px;
+      height: 408px;
       border-radius: 17px;
       display: flex !important;
+      background: transparent;
     }
     .slick-next {
       display: none !important;
@@ -63,5 +73,19 @@
     .slick-prev {
       display: none !important;
     }
+  }
+
+  .carousel-inner {
+    width: 165px;
+  }
+  .carousel-control-prev {
+    width: 21.5%;
+    height: 350px;
+    .carousel-control-prev-icon {
+      background-image: none !important;
+    }
+  }
+  .carousel-control-next {
+    height: 0px;
   }
 }

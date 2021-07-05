@@ -7,7 +7,7 @@ import ListCarousel from "../component/ListCarousel";
 
 import ListMovie from "../component/ListMovie";
 import SearchBar from "../component/SearchBar";
-
+import CinemaListComponent from "../component/cinemaList"
 import Section_1 from "../component/Section_1";
 import IntroduceApp from "../component/introduceApp"
 import NavBars from "../component/NavBars";
@@ -24,7 +24,7 @@ class Home extends Component {
         <SearchBar />
 
         <ListMovie />
-
+        <CinemaListComponent />
         <Section_1 />
         <IntroduceApp />
         <Footer />

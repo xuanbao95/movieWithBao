@@ -154,7 +154,7 @@ export default function RightHeaderComponent() {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item" style={{ cursor: "pointer" }} onClick={logOut}>Đăng xuất</a>
-                                        <Link className="nav-link" to="/user" className="dropdown-item" style={{ cursor: "pointer" }}>Xem thông tin tài khoản</Link>
+                                        <Link className="nav-link" to="/" className="dropdown-item" style={{ cursor: "pointer" }}>Home</Link>
                                         {maLoaiNguoiDung == 'QuanTri' ?
                                             <Link className="nav-link" to="/admin" className="dropdown-item" style={{ cursor: "pointer" }}>Quản lý</Link>
                                             :
